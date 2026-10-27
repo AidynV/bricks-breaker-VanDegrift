@@ -70,15 +70,18 @@ void Game::Render() const
 {
 	Console::Lock(true);
 	Console::Clear();
-	
+
 	paddle.Draw();
 	ball.Draw();
 
-	// TODO #3 - Update render to render all bricks
-	brick.Draw();
+	for (const auto& brick : bricks)
+	{
+		brick.Draw();
+	}
 
 	Console::Lock(false);
 }
+
 
 void Game::CheckCollision()
 {
