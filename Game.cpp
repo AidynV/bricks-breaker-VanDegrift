@@ -105,14 +105,30 @@ void Game::Render() const
 void Game::CheckCollision()
 {
 	// TODO #4 - Update collision to check all bricks
-	for (auto it = bricks.begin(); it != bricks.end(); )
+	for (auto it = bricks.begin(); it != bricks.end();)
 	{
-		// Check collision for this specific brick
-		if (it->Contains(ball.x_position + ball.x_velocity, ball.y_position + ball.y_velocity))
+		if (it->Contains(
+			ball.x_position + ball.x_velocity,
+			ball.y_position + ball.y_velocity))
 		{
 			it->hits++;
+
+			if (it->hits == 1)
+			{
+				it->color = ConsoleColor::Blue;
+			}
+			else if (it->hits == 2)
+			{
+				it->color = ConsoleColor::Red;
+			}
+			else if (it->hits == 3)
+			{
+				it->color = ConsoleColor::Black;
+			}
 			ball.y_velocity *= -1;
+			
 			// TODO #5 - If the ball hits the same brick 3 times (color == black), remove it from the vector
+
 			if (it->hits >= 3)
 			{
 				it = bricks.erase(it);
